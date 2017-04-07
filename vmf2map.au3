@@ -73,7 +73,6 @@ Func Convert($vmf, $map)
 
 	$vmf_content = StringRegExpReplace($vmf_content,'(?s)editor(.*?)}',"")
 
-
 $solid_content = _StringBetween($vmf_content,"<solid>","</solid>")
 
 $solids = ""
