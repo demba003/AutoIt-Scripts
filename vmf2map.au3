@@ -10,15 +10,15 @@ If $CmdLine[0]="" Then
 $gui=1
 #Region ### START Koda GUI section ###
 $Form = GUICreate(" VMF ==> MAP", 402, 155, -1, -1)
-GUICtrlCreateLabel("Plik .vmf", 8, 9, 44, 17)
-$Choose = GUICtrlCreateButton("Wybierz plik", 56, 3, 75, 25)
+GUICtrlCreateLabel(.vmf file", 8, 9, 44, 17)
+$Choose = GUICtrlCreateButton("Choose file", 56, 3, 75, 25)
 $vmf_lbl = GUICtrlCreateInput("", 136, 6, 257, 21)
-GUICtrlCreateLabel("Plik .map", 8, 41, 47, 17)
-$Save = GUICtrlCreateButton("Zapisz do", 56, 35, 75, 25)
+GUICtrlCreateLabel(".map file", 8, 41, 47, 17)
+$Save = GUICtrlCreateButton("Save to", 56, 35, 75, 25)
 $map_lbl = GUICtrlCreateInput("", 136, 38, 257, 21)
-$Convert = GUICtrlCreateButton("Konwertuj", 8, 80, 387, 25)
+$Convert = GUICtrlCreateButton("Convert", 8, 80, 387, 25)
 $Progress = GUICtrlCreateProgress(8, 112, 387, 17)
-GUICtrlCreateLabel("COPYRIGHT 2013 BY DEMBA //demba.tk", 168, 136, 229, 17)
+GUICtrlCreateLabel("COPYRIGHT 2013 BY DEMBA //github.com/demba003", 168, 136, 229, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -28,10 +28,10 @@ While 1
 		Case $GUI_EVENT_CLOSE
 			Exit
 		Case $Choose
-			$vmf_file = FileOpenDialog("Wybierz plik .vmf","","Pliki .vmf (*.vmf)","","",$Form)
+			$vmf_file = FileOpenDialog("Choose .vmf file","",".vmf files (*.vmf)","","",$Form)
 			GUICtrlSetData($vmf_lbl, $vmf_file)
 		Case $Save
-			$map_file = FileSaveDialog("Gdzie zapisać plik .map","","Pliki .map (*.map)","","",$Form)
+			$map_file = FileSaveDialog("Saving location for .map file","",".map files (*.map)","","",$Form)
 			If Not StringInStr($map_file,".map") Then
 			If Not $map_file="" Then $map_file = $map_file & ".map"
 			EndIf
@@ -47,7 +47,7 @@ $gui=0
 If StringInStr($CmdLine[1],".vmf") Then
 Convert($CmdLine[1],StringReplace($CmdLine[1],".vmf",".map"))
 Else
-MsgBox(0,"Błąd","Niepoprawny plik")
+MsgBox(0,"Error","Bad file")
 EndIf
 EndIf
 
@@ -102,5 +102,5 @@ For $i=0 To UBound($solid_content)-1
 Next
 FileWrite($map,'{'&@CRLF&'"classname" "worldspawn"'&@CRLF&'"MaxRange" "4096"'&@CRLF&'"mapversion" "1"'&@CRLF&'"wad" "wad" "\valve\cstrike\cstrike.wad;\valve\valve\halflife.wad"'&@CRLF& $solids & '}' & @CRLF)
 If $gui=1 Then GUICtrlSetData($Progress,100)
-MsgBox(0,"Info","Konwersja zakończona!")
+MsgBox(0,"Info","Conversion completed!")
 EndFunc
